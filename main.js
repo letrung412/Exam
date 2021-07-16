@@ -1,31 +1,38 @@
-const addTask = document.getElementById("add-new-task");
+const ul = document.getElementsByClassName('collection')
+const addTask = document.getElementById('add-new-task')
+const btnDeleteAllTasks = document.getElementById('delete-all')
 
-function newTask() {
-    const new_task = document.getElementById("new-task");
-    const li = document.createElement("li");
-    li.innerHTML = new_task.value;
-    li.setAttribute("class", "collection-item"); //style
+addTask.addEventListener('click', ()=>addNewTask())
 
-    const ul = document.getElementsByClassName("collection");
-    ul[0].appendChild(li);
+btnDeleteAllTasks.addEventListener('click',()=>deleteAllTasks())
 
-    //add button
-    const button = document.createElement("button");
-    button.innerHTML = "Delete";
-    button.setAttribute("class" , "btn"); //style
-    li.appendChild(button);
+const addNewTask = () =>{
+    const newTask = document.getElementById('new-task')
 
-    //add event
-    button.addEventListener("click" ,() => {
-        // li.innerHTML = ""
-        li.remove();
-    })
+    const li = document.createElement('li')
+    li.innerHTML = newTask.value
+    li.setAttribute('class', 'collection-item')
+    ul[0].appendChild(li)
+
+    const btn = document.createElement('button')
+    btn.innerHTML = 'Delete'
+    btn.setAttribute('class', 'btn')
+    btn.addEventListener('click', ()=> li.remove())
+    li.appendChild(btn)    
+
+    const btn = document.createElement('button')
+    btn.innerHTML = 'Update'
+    btn.setAttribute('class', 'btn')
+    btn.addEventListener('click', ()=> li.remove())
+    li.appendChild(btn) 
+
+    newTask.value= ''
 }
 
-addTask.addEventListener("click" , () => newTask());
+const deleteAllTasks = () =>{
+    ul[0].innerHTML=''
+}
 
-const deleteAll = document.getElementById("delete-all");
-deleteAll.addEventListener("click" , () => {
-    const ul = document.getElementsByClassName("collection");
-    ul[0].innerHTML = "";
-})
+const updateTask = (tag )=>{
+
+}
