@@ -22,7 +22,7 @@ function newTask() {
     })
 }
 
-addTask.addEventListener("click" , () => newTask());
+addTask.addEventListener("click" , newTask());
 
 const deleteAll = document.getElementById("delete-all");
 deleteAll.addEventListener("click" , () => {
