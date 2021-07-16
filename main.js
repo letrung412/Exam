@@ -17,8 +17,8 @@ function newTask() {
 
     //add event
     button.addEventListener("click" ,() => {
-        li.innerHTML = ""
-        // li.remove();
+        // li.innerHTML = ""
+        li.remove();
     })
 }
 
