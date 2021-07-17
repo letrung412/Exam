@@ -32,7 +32,3 @@ const addNewTask = () =>{
 const deleteAllTasks = () =>{
     ul[0].innerHTML=''
 }
-
-const updateTask = (tag )=>{
-
-}
