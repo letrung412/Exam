@@ -3,9 +3,9 @@ const btnAddTask = document.getElementById('add-new-task')
 const btnDeleteAllTasks = document.getElementById('delete-all')
 
 btnAddTask.addEventListener('click', () => addNewTask())
-
 btnDeleteAllTasks.addEventListener('click',()=>deleteAllTasks())
 
+//add task
 const addNewTask = () =>{
     const newTask = document.getElementById('new-task')
 
@@ -18,12 +18,14 @@ const addNewTask = () =>{
     divContent.setAttribute('style','flex-grow: 8')
     li.appendChild(divContent)
 
+    //delete task
     const btnDelete = document.createElement('button')
     btnDelete.innerHTML = 'Delete'
     btnDelete.setAttribute('class', 'btn')
     btnDelete.addEventListener('click', ()=> li.remove())
     li.appendChild(btnDelete)    
 
+    //update task
     const btnUpdate = document.createElement('button')
     btnUpdate.innerHTML = 'Update'
     btnUpdate.setAttribute('class', 'btn')
@@ -34,10 +36,12 @@ const addNewTask = () =>{
     newTask.value= ''
 }
 
+//delete all tasks
 const deleteAllTasks = () =>{
     ul[0].innerHTML=''
 }
 
+// update task
 const updateTask = (tag )=>{
     //hidden li.children
     const arrChild = tag.children
