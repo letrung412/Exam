@@ -9,31 +9,35 @@ btnDeleteAllTasks.addEventListener('click',()=>deleteAllTasks())
 const addNewTask = () =>{
     const newTask = document.getElementById('new-task')
 
-    const li = document.createElement('li')
-    li.setAttribute('class', 'collection-item')
-    li.setAttribute('style', 'display: flex')
-
-    const divContent = document.createElement('div')
-    divContent.innerHTML = newTask.value
-    divContent.setAttribute('style','flex-grow: 8')
-    li.appendChild(divContent)
-
-    //delete task
-    const btnDelete = document.createElement('button')
-    btnDelete.innerHTML = 'Delete'
-    btnDelete.setAttribute('class', 'btn')
-    btnDelete.addEventListener('click', ()=> li.remove())
-    li.appendChild(btnDelete)    
-
-    //update task
-    const btnUpdate = document.createElement('button')
-    btnUpdate.innerHTML = 'Update'
-    btnUpdate.setAttribute('class', 'btn')
-    btnUpdate.addEventListener('click', ()=> updateTask(li))
-    li.appendChild(btnUpdate) 
-
-    ul[0].appendChild(li)
-    newTask.value= ''
+    if(newTask.value == ''){
+        alert('Nothing to add!')
+    } else{
+        const li = document.createElement('li')
+        li.setAttribute('class', 'collection-item')
+        li.setAttribute('style', 'display: flex')
+    
+        const divContent = document.createElement('div')
+        divContent.innerHTML = newTask.value
+        divContent.setAttribute('style','flex-grow: 8')
+        li.appendChild(divContent)
+    
+        //delete task
+        const btnDelete = document.createElement('button')
+        btnDelete.innerHTML = 'Delete'
+        btnDelete.setAttribute('class', 'btn')
+        btnDelete.addEventListener('click', ()=> li.remove())
+        li.appendChild(btnDelete)    
+    
+        //update task
+        const btnUpdate = document.createElement('button')
+        btnUpdate.innerHTML = 'Update'
+        btnUpdate.setAttribute('class', 'btn')
+        btnUpdate.addEventListener('click', ()=> updateTask(li))
+        li.appendChild(btnUpdate) 
+    
+        ul[0].appendChild(li)
+        newTask.value= ''
+    }
 }
 
 //delete all tasks
