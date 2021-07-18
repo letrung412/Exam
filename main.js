@@ -39,8 +39,9 @@ const deleteAllTasks = () =>{
 }
 
 const updateTask = (tag )=>{
+    //hidden li.children
     const arrChild = tag.children
-    for(let i=0; i< 3; i++)
+    for(let i=0; i< arrChild.length; i++)
         arrChild[i].style.display = "none"
 
     const inputUpdate = document.createElement('input')
@@ -51,10 +52,16 @@ const updateTask = (tag )=>{
     btnConfirm.innerHTML = 'Confirm'
     btnConfirm.setAttribute('class', 'btn')
     btnConfirm.addEventListener('click', ()=> {
-        for(let i=0; i< 3; i++)
+        //display li.children
+        for(let i=0; i< arrChild.length; i++)
             arrChild[i].style.display = "inline-block"
-        tag.children[3].style.display = "none"
-        tag.children[4].style.display = "none"
+
+        //set new value of div
+        arrChild[0].innerText = inputUpdate.value
+
+        //delete input update and button confirm
+        inputUpdate.remove()
+        btnConfirm.remove()
     })
     tag.appendChild(btnConfirm)
 }
