@@ -65,8 +65,11 @@ const updateTask = (tag )=>{
         for(let i=0; i< arrChild.length; i++)
             arrChild[i].style.display = "inline-block"
 
-        //set new value of div
-        arrChild[0].innerText = inputUpdate.value
+        if(arrChild[0].innerText == inputUpdate.value)
+            alert('Nothing change!')
+        else
+            //set new value of div
+            arrChild[0].innerText = inputUpdate.value
 
         //delete input update and button confirm
         inputUpdate.remove()
