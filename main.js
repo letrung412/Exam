@@ -18,6 +18,7 @@ const addNewTask = () =>{
     
         const divContent = document.createElement('div')
         divContent.innerHTML = newTask.value
+        divContent.addEventListener('dblclick', ()=> updateTask(li)) // double click to update data
         divContent.setAttribute('style','flex-grow: 8')
         li.appendChild(divContent)
     
