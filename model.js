@@ -1,5 +1,5 @@
-let array = [];
 export function SaveTask(value) {
+    const array = JSON.parse(localStorage["tasks"])
     array.push(value);
     localStorage["tasks"] = JSON.stringify(array);
 }
@@ -18,6 +18,12 @@ export function ReadTask() {
     }
 }
 
-export function DeleteAll(array) {
-    localStorage["tasks"] = JSON.stringify(array);
+export function DeleteAll() {
+    localStorage["tasks"] = JSON.stringify([]);
+}
+
+export function Delete(index){
+    const tasks = JSON.parse(localStorage["tasks"])
+    tasks.splice(index,1)
+    localStorage["tasks"] = JSON.stringify(tasks);
 }

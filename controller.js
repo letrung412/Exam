@@ -10,11 +10,19 @@ view.ShowAllTask(items);
 document.getElementById("add-new-task").addEventListener("click" , () => {
     const value = document.getElementById("new-task").value;
     AddNewTask(value);  //controller.addnewtask()
+
 })
 
 document.getElementById("delete-all").addEventListener("click" , () => {
     DeleteAllTask(); //controller.deleteAlltask -- business logic layer -- bll
 })
+
+const btnDeletes = document.getElementsByClassName("delete")
+for(let i=0; i< btnDeletes.length; i++){
+    btnDeletes[i].addEventListener('click',()=>{
+        DeleteTask(i)
+    })
+}
 
 //Method view layer, model layer
 function AddNewTask(value) {
@@ -25,4 +33,9 @@ function AddNewTask(value) {
 function DeleteAllTask() {
     model.DeleteAll();
     view.DeleteAll();
+}
+
+function DeleteTask(index){
+    model.Delete(index)
+    view.Delete(index)
 }
