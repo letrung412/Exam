@@ -116,12 +116,6 @@ export function SaveTask() {
     input.setAttribute("value", `${value}`)
 
     const list = JSON.parse(localStorage.getItem("tasks"))
-    const newTasks = list.filter(item => {
-        if(oldValue === value) {
-            return item
-        }
-        return item !== oldValue
-    })
-    newTasks.push(`${value}`)
+    const newTasks = list.map(item => item === oldValue ? value : item)
     localStorage.setItem("tasks", JSON.stringify(newTasks))
 }
