@@ -1,44 +1,7 @@
 export function ShowAllTask(items) {
     const ul = document.getElementsByClassName("collection");
     items.forEach(item => {
-        const li = document.createElement("li");
-        li.setAttribute("class" , "collection-item");
-
-        const div_input = document.createElement("div")
-        div_input.setAttribute("class", "input-field")
-        const input = document.createElement("input")
-        input.setAttribute("type", "text")
-        input.setAttribute("value", `${item}`)
-        input.setAttribute("disabled", "")
-        div_input.appendChild(input)
-
-        const btnDelete = document.createElement("button")
-        btnDelete.setAttribute("class", "btn red")
-        btnDelete.innerHTML = "Delete"
-        btnDelete.addEventListener("click", () => {
-            DeleteTask()
-        })
-
-        const btnEdit = document.createElement("button")
-        btnEdit.setAttribute("class", "btn orange darken-1")
-        btnEdit.innerHTML = "Edit"
-        btnEdit.addEventListener("click", () => {
-            EditTask()
-        })
-
-        const btnSave = document.createElement("button")
-        btnSave.setAttribute("class", "btn green")
-        btnSave.setAttribute("style", "display: none")
-        btnSave.innerHTML = "Save"
-        btnSave.addEventListener("click", () => {
-            SaveTask()
-        })
-
-        li.appendChild(div_input)
-        li.appendChild(btnDelete)
-        li.appendChild(btnEdit)
-        li.appendChild(btnSave)
-        ul[0].appendChild(li);
+        AddTask(item)
     })
 }
 
