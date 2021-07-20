@@ -18,6 +18,6 @@ export function ReadTask() {
     }
 }
 
-export function DeleteAll(array) {
-    localStorage["tasks"] = JSON.stringify(array);
+export function DeleteAll() {
+    localStorage.clear()
 }
