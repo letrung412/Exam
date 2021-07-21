@@ -53,6 +53,13 @@ export function DeleteAll() {
 
 export function DeleteTask() {
     const li = document.activeElement.parentNode
+<<<<<<< HEAD
+=======
+    const value = li.firstChild.firstChild.value
+    const list = JSON.parse(localStorage.getItem("tasks"))
+    const newTasks = list.filter(item => item !== value)
+    localStorage.setItem("tasks", JSON.stringify(newTasks))
+>>>>>>> 40a5553e909e79be4c2e4b6db600c028b11a75db
     li.remove()
 }
 

@@ -45,6 +45,7 @@ function DeleteAllTask() {
     model.DeleteAll();
     view.DeleteAll();
 }
+<<<<<<< HEAD
 
 function RemoveTask() {
     model.DeleteTask()
@@ -59,3 +60,5 @@ function Edit() {
 //    view.SaveTask()
 //    model.SaveItem()
 //}
+=======
+>>>>>>> 40a5553e909e79be4c2e4b6db600c028b11a75db

@@ -20,6 +20,7 @@ export function ReadTask() {
 
 export function DeleteAll() {
     localStorage.clear()
+<<<<<<< HEAD
 }
 
 export function DeleteTask() {
@@ -28,6 +29,8 @@ export function DeleteTask() {
     const list = JSON.parse(localStorage.getItem("tasks"))
     const newTasks = list.filter(item => item !== value)
     localStorage.setItem("tasks", JSON.stringify(newTasks))
+=======
+>>>>>>> 40a5553e909e79be4c2e4b6db600c028b11a75db
 }
 
 //export function SaveItem() {
