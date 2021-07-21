@@ -16,11 +16,11 @@ document.getElementById("delete-all").addEventListener("click" , () => {
     DeleteAllTask(); //controller.deleteAlltask -- business logic layer -- bll
 })
 
-document.querySelectorAll('.red').forEach(item => {
-    item.addEventListener("click", () => {
-        RemoveTask()
-    })
-})
+//document.querySelectorAll('.red').forEach(item => {
+//    item.addEventListener("click", () => {
+//        RemoveTask()
+//    })
+//})
 
 document.querySelectorAll('.orange').forEach(item => {
     item.addEventListener("click", () => {
@@ -46,10 +46,10 @@ function DeleteAllTask() {
     view.DeleteAll();
 }
 
-function RemoveTask() {
-    model.DeleteTask()
-    view.DeleteTask()
-}
+//function RemoveTask() {
+//    model.DeleteTask()
+//    view.DeleteTask()
+//}
 
 function Edit() {
     view.EditTask()
