@@ -7,6 +7,11 @@ view.ShowAllTask(items);
 ///////////////////////////////////////////////////////////////////
 
 //DOM///////
+const buttons = document.getElementsByClassName("btn delete");
+for (let i = 0 ; i < buttons.length; i++) {
+    buttons[i].addEventListener("click" , () => DeleteOneTask(i));
+}
+
 document.getElementById("add-new-task").addEventListener("click" , () => {
     const value = document.getElementById("new-task").value;
     AddNewTask(value);  //controller.addnewtask()
@@ -25,4 +30,9 @@ function AddNewTask(value) {
 function DeleteAllTask() {
     model.DeleteAll();
     view.DeleteAll();
+}
+
+function DeleteOneTask(index) {
+    model.RemoveTask(index);
+    view.RemoveTask();
 }
