@@ -6,6 +6,7 @@ export function ShowAllTask(items) {
 export function AddTask(value) {
     const ul = document.getElementsByClassName("collection");
     AddItem(ul, value);
+    location.reload();
 }
 
 export function DeleteAll() {
