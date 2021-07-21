@@ -26,7 +26,6 @@ const buttons = document.getElementsByClassName("btn delete");
 for (let i = 0 ; i < buttons.length; i++) {
     buttons[i].addEventListener("click" , () => {
         const li = buttons[i].parentElement;
-        console.log(li)
         DeleteOneTask(i,li)
     });
 }
