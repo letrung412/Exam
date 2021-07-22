@@ -21,6 +21,15 @@ const DeleteOneTask = (index,li) => {
     model.RemoveTask(index);
     view.RemoveTask(li);
 }
+
+const Edit = (li) => {
+    view.EditTask(li)
+}
+
+const Save = (li, index, value, oldValue) => {
+    view.SaveTask(li)
+    model.SaveEditTask(index, value)
+}
 ///////////////////////////////
 const buttons = document.getElementsByClassName("btn delete");
 for (let i = 0 ; i < buttons.length; i++) {
@@ -28,6 +37,21 @@ for (let i = 0 ; i < buttons.length; i++) {
         const li = buttons[i].parentElement;
         DeleteOneTask(i,li)
     });
+}
+
+document.querySelectorAll(".orange").forEach(item => item.addEventListener("click", () => {
+    const li = document.activeElement.parentNode
+    Edit(li)
+}))
+
+const btnSave = document.getElementsByClassName("btn save")
+for (let i = 0; i < btnSave.length; i++) {
+    btnSave[i].addEventListener("click", () => {
+        const li = btnSave[i].parentNode
+        const value = li.firstChild.firstChild.value
+        const oldValue = li.firstChild.firstChild.defaultValue
+        Save(li, i, value, oldValue)
+    })
 }
 
 document.getElementById("add-new-task").addEventListener("click" , () => {
@@ -38,4 +62,3 @@ document.getElementById("add-new-task").addEventListener("click" , () => {
 document.getElementById("delete-all").addEventListener("click" , () => {
     DeleteAllTask(); //controller.deleteAlltask -- business logic layer -- bll
 })
-
