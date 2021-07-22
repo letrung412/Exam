@@ -9,25 +9,32 @@ view.ShowAllTask(items);
 //DOM///////
 document.getElementById("add-new-task").addEventListener("click" , () => {
     const value = document.getElementById("new-task").value;
-    AddNewTask(value);  //controller.addnewtask()
-
+    let id = Math.floor(Math.random() * 10000);
+    AddNewTask({id, value});  //controller.addnewtask()
+    const newItems =  model.ReadTask();
+    for(let i=0; i< newItems.length; i++){
+        let li = document.getElementById(newItems[i].id)
+        li.children[1].addEventListener('click', ()=>{
+            DeleteTask(newItems[i].id)
+        })
+    }
 })
 
 document.getElementById("delete-all").addEventListener("click" , () => {
     DeleteAllTask(); //controller.deleteAlltask -- business logic layer -- bll
 })
 
-const btnDeletes = document.getElementsByClassName("delete")
-for(let i=0; i< btnDeletes.length; i++){
-    btnDeletes[i].addEventListener('click',()=>{
-        DeleteTask(i)
+for(let i=0; i< items.length; i++){
+    let li = document.getElementById(items[i].id)
+    li.children[1].addEventListener('click', ()=>{
+        DeleteTask(items[i].id)
     })
 }
 
 //Method view layer, model layer
-function AddNewTask(value) {
-    model.SaveTask(value); //data access layer -- dal
-    view.AddTask(value);
+function AddNewTask({id, value}) {
+    model.AddTask({id, value}); //data access layer -- dal
+    view.AddTask({id, value});
 }
 
 function DeleteAllTask() {
@@ -35,7 +42,7 @@ function DeleteAllTask() {
     view.DeleteAll();
 }
 
-function DeleteTask(index){
-    model.Delete(index)
-    view.Delete(index)
+function DeleteTask(id){
+    model.Delete(id)
+    view.Delete(id)
 }

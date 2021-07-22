@@ -1,17 +1,31 @@
 export function ShowAllTask(items) {
     items.forEach(item => {
-        AddTask(item)
+        oneTask(item)
     })
 }
 
-export let a=0
+export function AddTask({id, value}) {
+    oneTask({id, value})
+}
 
-export function AddTask(value) {
+export function DeleteAll() {
+    const ul = document.getElementsByClassName("collection");
+    ul[0].innerHTML = ""
+}
+
+export function Delete(id){
+    const li = document.getElementById(id)
+    li.remove()
+}
+
+function oneTask({id, value}){
     const ul = document.getElementsByClassName("collection");
 
     const li = document.createElement('li')
     li.setAttribute('class', 'collection-item')
     li.setAttribute('style', 'display: flex')
+    li.setAttribute('id', id)
+
 
     const divContent = document.createElement('div')
     divContent.innerHTML = value
@@ -34,15 +48,4 @@ export function AddTask(value) {
     li.appendChild(btnUpdate) 
 
     ul[0].appendChild(li)
-}
-
-export function DeleteAll() {
-    const ul = document.getElementsByClassName("collection");
-    ul[0].innerHTML = ""
-}
-
-export function Delete(index){
-    const ul = document.getElementsByClassName("collection");
-    const li = ul[0].children[index]
-    li.remove()
 }
