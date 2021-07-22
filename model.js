@@ -12,7 +12,7 @@ export function ReadTask() {
     }
 }
 
-export function AddTask({id, value}) {
+export function AddTask(id, value) {
     let array
     if(localStorage["tasks"]) {array = JSON.parse(localStorage["tasks"])}
     else {array = []}
@@ -27,4 +27,13 @@ export function DeleteAll() {
 export function Delete(id){
     const tasks = JSON.parse(localStorage["tasks"])
     localStorage["tasks"] = JSON.stringify(tasks.filter(task=> task.id !== id));
+}
+
+export function Update(id, newValue){
+    const tasks = JSON.parse(localStorage["tasks"])
+    tasks.forEach(task => {
+        if(task.id==id) task.value = newValue
+        return task
+    });
+    localStorage["tasks"] = JSON.stringify(tasks);
 }
