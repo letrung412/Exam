@@ -43,7 +43,9 @@ export function Update(id, newValue){
     for(let i=0; i< 3; i++)
         arrChild[i].style.display = "inline-block"
 
-    if(arrChild[0].innerText == newValue)
+    if(newValue == '')
+        alert('Invalid data!')
+    else if(newValue == arrChild[0].innerText)
         alert('Nothing change!')
     else
         //set new value of div

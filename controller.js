@@ -10,25 +10,31 @@ view.ShowAllTask(items);
 
 //Add
 document.getElementById("add-new-task").addEventListener("click" , () => {
-    const value = document.getElementById("new-task").value;
-    let id = Math.floor(Math.random() * 10000);
-    //controller.addnewtask()
-    AddNewTask(id, value);  
+    const data = document.getElementById("new-task");
+    if(data.value !== ''){
+        let id = Math.floor(Math.random() * 10000);
+        //controller.addnewtask()
+        AddNewTask(id, data.value);  
+    
+        //addEventListener for delete button and update button of new li
+        let li = document.getElementById(id)
+        //delete button
+        li.children[1].addEventListener('click', ()=>{
+            DeleteTask(id)
+        })
+        //update button
+        li.children[2].addEventListener('click', ()=>{
+            UpdateTask(id)
+        })
+        //doubleClick to update
+        li.children[0].addEventListener('click', ()=>{
+            UpdateTask(id)
+        })
 
-    //addEventListener for delete button and update button of new li
-    let li = document.getElementById(id)
-    //delete button
-    li.children[1].addEventListener('click', ()=>{
-        DeleteTask(id)
-    })
-    //update button
-    li.children[2].addEventListener('click', ()=>{
-        UpdateTask(id)
-    })
-    //doubleClick to update
-    li.children[0].addEventListener('click', ()=>{
-        UpdateTask(id)
-    })
+        data.value = ''
+    } else{
+        alert('Notthing to add!')
+    }
 })
 
 //delete all
