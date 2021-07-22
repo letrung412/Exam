@@ -14,8 +14,10 @@ export function DeleteAll() {
 }
 
 export function Delete(id){
-    const li = document.getElementById(id)
-    li.remove()
+    if(id!==null){
+        const li = document.getElementById(id)
+        li.remove()
+    }   
 }
 
 function oneTask({id, value}){

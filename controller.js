@@ -11,13 +11,11 @@ document.getElementById("add-new-task").addEventListener("click" , () => {
     const value = document.getElementById("new-task").value;
     let id = Math.floor(Math.random() * 10000);
     AddNewTask({id, value});  //controller.addnewtask()
-    const newItems =  model.ReadTask();
-    for(let i=0; i< newItems.length; i++){
-        let li = document.getElementById(newItems[i].id)
-        li.children[1].addEventListener('click', ()=>{
-            DeleteTask(newItems[i].id)
-        })
-    }
+    
+    let li = document.getElementById(id)
+    li.children[1].addEventListener('click', ()=>{
+        DeleteTask(id)
+    })
 })
 
 document.getElementById("delete-all").addEventListener("click" , () => {
