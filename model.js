@@ -63,8 +63,9 @@ export function RemoveTask(index) {
 
 export function SaveEditTask(index, value, oldValue) {
     const list = JSON.parse(localStorage["tasks"])
+    const oldObj = list[index]
     const newObj = {
-        id : index,
+        id : oldObj.id,
         value : value ? value : oldValue
     }
     if(!value) {
