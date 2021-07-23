@@ -8,8 +8,11 @@ import * as model from "./model.js";
 })();
 
 const AddNewTask = (value) => {
-    model.SaveTask(value); 
-    view.AddTask(value);
+    const index = model.SaveTask(value); 
+    if (index) {
+        view.AddTask(value, index);
+    }
+    view.AddTask(value , 0);
 }
 
 const DeleteAllTask = () => {
@@ -21,12 +24,25 @@ const DeleteOneTask = (index,li) => {
     model.RemoveTask(index);
     view.RemoveTask(li);
 }
+
+const UpdateTask = (btn_edit) => {
+    const data = view.UpdateTask(btn_edit);
+    model.UpdateTask(data);
+}
 ///////////////////////////////
-const buttons = document.getElementsByClassName("btn delete");
-for (let i = 0 ; i < buttons.length; i++) {
-    buttons[i].addEventListener("click" , () => {
-        const li = buttons[i].parentElement;
+const btndels = document.getElementsByClassName("btn delete");
+for (let i = 0 ; i < btndels.length; i++) {
+    btndels[i].addEventListener("click" , () => {
+        const li = btndels[i].parentElement;
         DeleteOneTask(i,li)
+    });
+}
+
+const btnedits = document.getElementsByClassName("btn edit");
+for (let i = 0 ; i < btnedits.length; i++) {
+    btnedits[i].addEventListener("click" , () => {
+        // const li = btnedits[i].parentElement;
+        UpdateTask(btnedits[i])
     });
 }
 

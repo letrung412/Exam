@@ -1,12 +1,18 @@
 export function ShowAllTask(items) {
     const ul = document.getElementsByClassName("collection");
-    items.forEach(item => AddItem(ul, item.value));
+    items.forEach((item,index) => {
+        if (item != null) {
+            AddItem(ul, item.value, item.id);
+        } else {
+            AddItem(ul, "", index);
+        }
+    });
 }
 
-export function AddTask(value) {
+export function AddTask(value, index) {
     const ul = document.getElementsByClassName("collection");
-    AddItem(ul, value);
-    location.reload();
+    AddItem(ul, value, index);
+    // location.reload();
 }
 
 export function DeleteAll() {
@@ -16,17 +22,28 @@ export function DeleteAll() {
 
 export function RemoveTask(li) {
     li.remove();
-    location.reload();
+    // location.reload();
 }
 
-function AddItem(ul, value) {
+export function UpdateTask(btn_edit) {
+    const value = prompt("Nhap vao du lieu moi: ");
+    if (value == null) {
+        return;
+    }
+    const index = btn_edit.getAttribute("id");
+    // location.reload();
+    return { index , value };
+}
+
+function AddItem(ul, value, index) {
     const li = document.createElement("li");
     if (value.length != 0) {
         li.innerHTML = value;
         li.setAttribute("class" , "collection-item");
         AddBtnDelete(li);
-        ul[0].appendChild(li);
+        AddBtnEdit(li, index);
     }
+    ul[0].appendChild(li);
 }
 
 function AddBtnDelete(li) {
@@ -35,3 +52,18 @@ function AddBtnDelete(li) {
     li.appendChild(button);
     button.setAttribute("class" , "btn delete");
 }
+
+function AddBtnEdit(li, index) {
+    const button = document.createElement("button");
+    button.innerHTML = "Edit";
+    li.appendChild(button);
+    button.setAttribute("class" , "btn edit");
+    button.setAttribute("id" , index)
+}
+
+// function AddBtn(li, name) {
+//     const button = document.createElement("button");
+//     button.innerHTML = name;
+//     li.appendChild(button);
+//     button.setAttribute("class" , `btn ${name}`);
+// }
