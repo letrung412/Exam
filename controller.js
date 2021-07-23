@@ -28,7 +28,7 @@ const Edit = (li) => {
 
 const Save = (li, index, value, oldValue) => {
     view.SaveTask(li)
-    model.SaveEditTask(index, value)
+    model.SaveEditTask(index, value, oldValue)
 }
 ///////////////////////////////
 const buttons = document.getElementsByClassName("btn delete");
