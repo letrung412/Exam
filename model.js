@@ -29,6 +29,7 @@ export function SaveTask(value) {
         array.push(obj);
         localStorage["tasks"] = JSON.stringify(array);
     }
+    return index;
 }
     
 //notify
@@ -52,10 +53,33 @@ export function DeleteAll() {
 export function RemoveTask(index) {
     const items = JSON.parse(localStorage["tasks"]);
     if (Array.isArray(items)) {
-        items.splice(index, 1); 
+        // items.splice(index, 1); 
+        // if (items.length == 1) {
+        //     localStorage["tasks"] = JSON.stringify([]);
+        // }
+        // localStorage["tasks"] = JSON.stringify(items);
+        let new_items = items.map(item => {
+            if (item!= null && item.id == index) {
+                return null
+            }
+            return item;
+        })
         if (items.length == 1) {
             localStorage["tasks"] = JSON.stringify([]);
         }
+        localStorage["tasks"] = JSON.stringify(new_items);
+    }
+    return items;
+}
+
+export function UpdateTask(data) {
+    const items = JSON.parse(localStorage["tasks"]);
+    if (Array.isArray(items)) {
+        items.forEach(item => {
+            if (item != null && item.id == data.index) {
+                item.value = data.value;
+            }
+        })
         localStorage["tasks"] = JSON.stringify(items);
     }
     return items;
