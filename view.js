@@ -45,5 +45,5 @@ export function DeleteAll() {
 export function UpdateTask(btn_edit) {
     const value = prompt("Nhap du lieu can thay doi ");
     const id = btn_edit.getAttribute("id");
-    return { id , value};
+    return { id , value };
 }
