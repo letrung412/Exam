@@ -1,18 +1,33 @@
 import * as view from "./view.js";
 import * as model from "./model.js";
 
+document.getElementById("add-new-task").addEventListener("click" , () => {
+    const value = document.getElementById("new-task").value;
+    AddNewTask(value);  
+})
+
+document.getElementById("delete-all").addEventListener("click" , () => {
+    DeleteAllTask(); 
+})
+
 ///////////////*All Services*///////////////
-(() => {
-    const items = model.ReadTask();
-    view.ShowAllTask(items);
-})();
+const items = model.ReadTask();
+const all_btns = view.ShowAllTask(items);
+function AddEvent(all_btn) {
+    all_btn.map(btn => {
+        const li = btn.btn_del.parentElement;
+        btn.btn_del.addEventListener("click" , () => DeleteOneTask(btn.btn_del.getAttribute("id"),li));
+        btn.btn_edit.addEventListener("click" , () => UpdateTask(btn.btn_edit));
+    })
+}
+AddEvent(all_btns);
 
 const AddNewTask = (value) => {
     const index = model.SaveTask(value); 
-    if (index) {
-        view.AddTask(value, index);
-    }
-    view.AddTask(value , 0);
+    const btn = view.AddTask(value,index);
+    const li = btn.btn_del.parentElement;
+    btn.btn_del.addEventListener("click" , () => DeleteOneTask(btn.btn_del.getAttribute("id"),li));
+    btn.btn_edit.addEventListener("click" , () => UpdateTask(btn.btn_edit));
 }
 
 const DeleteAllTask = () => {
@@ -27,31 +42,14 @@ const DeleteOneTask = (index,li) => {
 
 const UpdateTask = (btn_edit) => {
     const data = view.UpdateTask(btn_edit);
-    model.UpdateTask(data);
-}
-///////////////////////////////
-const btndels = document.getElementsByClassName("btn delete");
-for (let i = 0 ; i < btndels.length; i++) {
-    btndels[i].addEventListener("click" , () => {
-        const li = btndels[i].parentElement;
-        DeleteOneTask(i,li)
-    });
+    const items = model.UpdateTask(data);
+    view.DeleteAll();
+    const all_btn = view.ShowAllTask(items);
+    AddEvent(all_btn);
 }
 
-const btnedits = document.getElementsByClassName("btn edit");
-for (let i = 0 ; i < btnedits.length; i++) {
-    btnedits[i].addEventListener("click" , () => {
-        // const li = btnedits[i].parentElement;
-        UpdateTask(btnedits[i])
-    });
-}
 
-document.getElementById("add-new-task").addEventListener("click" , () => {
-    const value = document.getElementById("new-task").value;
-    AddNewTask(value);  //controller.addnewtask()
-})
 
-document.getElementById("delete-all").addEventListener("click" , () => {
-    DeleteAllTask(); //controller.deleteAlltask -- business logic layer -- bll
-})
+
+
 

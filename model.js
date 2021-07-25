@@ -1,6 +1,6 @@
 export function SaveTask(value) {
     let index;
-    let array = localStorage["tasks"]; // undifined
+    let array = localStorage["tasks"]; 
     let obj = {};
     if (value.length == 0) {
         return;
@@ -29,10 +29,9 @@ export function SaveTask(value) {
         array.push(obj);
         localStorage["tasks"] = JSON.stringify(array);
     }
-    return index;
+    return obj.id;
 }
     
-//notify
 export function ReadTask() {
     try {
         const items = JSON.parse(localStorage["tasks"]);
@@ -53,17 +52,7 @@ export function DeleteAll() {
 export function RemoveTask(index) {
     const items = JSON.parse(localStorage["tasks"]);
     if (Array.isArray(items)) {
-        // items.splice(index, 1); 
-        // if (items.length == 1) {
-        //     localStorage["tasks"] = JSON.stringify([]);
-        // }
-        // localStorage["tasks"] = JSON.stringify(items);
-        let new_items = items.map(item => {
-            if (item!= null && item.id == index) {
-                return null
-            }
-            return item;
-        })
+        const new_items = items.filter(item => item.id != index);
         if (items.length == 1) {
             localStorage["tasks"] = JSON.stringify([]);
         }
@@ -76,7 +65,7 @@ export function UpdateTask(data) {
     const items = JSON.parse(localStorage["tasks"]);
     if (Array.isArray(items)) {
         items.forEach(item => {
-            if (item != null && item.id == data.index) {
+            if (item.id == data.id) {
                 item.value = data.value;
             }
         })

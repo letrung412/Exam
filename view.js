@@ -1,18 +1,40 @@
 export function ShowAllTask(items) {
-    const ul = document.getElementsByClassName("collection");
-    items.forEach((item,index) => {
-        if (item != null) {
-            AddItem(ul, item.value, item.id);
-        } else {
-            AddItem(ul, "", index);
-        }
-    });
+    const all_btn = items.map(item => AddTask(item.value,item.id));
+    return all_btn;
 }
 
-export function AddTask(value, index) {
+export function AddTask(value,index) {
     const ul = document.getElementsByClassName("collection");
-    AddItem(ul, value, index);
-    // location.reload();
+    const li = document.createElement("li");
+    li.innerHTML = value;
+    li.setAttribute("class" , "collection-item");
+    const btn_del = AddBtnDelete(li,index);
+    const btn_edit = AddBtnEdit(li,index);
+    ul[0].appendChild(li);
+    return { btn_del , btn_edit };
+}
+
+function AddBtnDelete(li,index) {
+    const button = document.createElement("button");
+    button.innerHTML = "delete";
+    button.setAttribute("class" , "btn");
+    button.setAttribute("id" , index);
+    li.appendChild(button);
+    return button;
+}
+
+function AddBtnEdit(li,index) {
+    const button = document.createElement("button");
+    button.innerHTML = "Edit";
+    button.setAttribute("class" , "btn");
+    button.setAttribute("id" , index);
+    li.appendChild(button);
+    return button;
+}
+
+export function RemoveTask(li) {
+    li.remove();
+    ShowAllTask();
 }
 
 export function DeleteAll() {
@@ -20,50 +42,8 @@ export function DeleteAll() {
     ul[0].innerHTML = ""
 }
 
-export function RemoveTask(li) {
-    li.remove();
-    // location.reload();
-}
-
 export function UpdateTask(btn_edit) {
-    const value = prompt("Nhap vao du lieu moi: ");
-    if (value == null) {
-        return;
-    }
-    const index = btn_edit.getAttribute("id");
-    // location.reload();
-    return { index , value };
+    const value = prompt("Nhap du lieu can thay doi ");
+    const id = btn_edit.getAttribute("id");
+    return { id , value };
 }
-
-function AddItem(ul, value, index) {
-    const li = document.createElement("li");
-    if (value.length != 0) {
-        li.innerHTML = value;
-        li.setAttribute("class" , "collection-item");
-        AddBtnDelete(li);
-        AddBtnEdit(li, index);
-    }
-    ul[0].appendChild(li);
-}
-
-function AddBtnDelete(li) {
-    const button = document.createElement("button");
-    button.innerHTML = "Delete";
-    li.appendChild(button);
-    button.setAttribute("class" , "btn delete");
-}
-
-function AddBtnEdit(li, index) {
-    const button = document.createElement("button");
-    button.innerHTML = "Edit";
-    li.appendChild(button);
-    button.setAttribute("class" , "btn edit");
-    button.setAttribute("id" , index)
-}
-
-// function AddBtn(li, name) {
-//     const button = document.createElement("button");
-//     button.innerHTML = name;
-//     li.appendChild(button);
-//     button.setAttribute("class" , `btn ${name}`);
-// }
