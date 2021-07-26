@@ -13,7 +13,7 @@ export function AddTask(value){
     const data = { name: value };
     const url = ' https://authencation.vercel.app/api/todo/create'
     fetch( url, {
-        method: 'POST', // or 'PUT'
+        method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
         },
