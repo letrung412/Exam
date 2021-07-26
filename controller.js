@@ -11,7 +11,7 @@ document.getElementById("delete-all").addEventListener("click" , () => {
 })
 
 ///////////////*All Services*///////////////
-const items = model.ReadTask();
+const items = await model.ReadTask();
 const all_btns = view.ShowAllTask(items);
 function AddEvent(all_btn) {
     all_btn.map(btn => {
@@ -24,7 +24,7 @@ AddEvent(all_btns);
 
 const AddNewTask = (value) => {
     const index = model.SaveTask(value); 
-    const btn = view.AddTask(value,index);
+    const btn = view.AddTask(value,index)
     const li = btn.btn_del.parentElement;
     btn.btn_del.addEventListener("click" , () => DeleteOneTask(btn.btn_del.getAttribute("id"),li));
     btn.btn_edit.addEventListener("click" , () => UpdateTask(btn.btn_edit));
@@ -43,7 +43,7 @@ const DeleteOneTask = (index,li) => {
 const UpdateTask = (btn_edit) => {
     const data = view.UpdateTask(btn_edit);
     const items = model.UpdateTask(data);
-    view.DeleteAll();
+    // view.DeleteAll();
     const all_btn = view.ShowAllTask(items);
     AddEvent(all_btn);
 }
