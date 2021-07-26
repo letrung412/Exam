@@ -1,7 +1,11 @@
 export function ShowAllTask(items) {
     items.forEach(item => {
-        oneTask(item.id, item.value)
+        oneTask(item.id, item.name)
     })
+}
+
+export function alertMess(str){
+    alert(str)
 }
 
 export function AddTask(id, value) {
@@ -23,8 +27,10 @@ export function Delete(id){
 export function createUpdateForm(id){
     const li = document.getElementById(id)
     const arrChild = li.children
-    for(let i=0; i< arrChild.length; i++)
-        arrChild[i].style.display = "none"
+
+    for(let i=0; i<3; i++)
+        arrChild[i].style.display = 'none'
+    //arrChild.map(el => el.style.display = 'none') 
 
     const inputUpdate = document.createElement('input')
     inputUpdate.setAttribute('value',arrChild[0].innerText)
@@ -43,13 +49,9 @@ export function Update(id, newValue){
     for(let i=0; i< 3; i++)
         arrChild[i].style.display = "inline-block"
 
-    if(newValue == '')
-        alert('Invalid data!')
-    else if(newValue == arrChild[0].innerText)
-        alert('Nothing change!')
-    else
-        //set new value of div
-        arrChild[0].innerText = newValue
+    newValue == '' ? alert('Invalid data!')
+    : newValue == arrChild[0].innerText? alert('Nothing change!')
+    : arrChild[0].innerText = newValue
 
     //delete input update and button confirm
     arrChild[4].remove()

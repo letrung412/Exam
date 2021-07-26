@@ -1,39 +1,21 @@
 import * as view from "./view.js";
-import * as model from "./model.js";
+import * as model from "./model.api.js";
 
 ////////method init////////////////////////////////////////////////
-const items = model.ReadTask();
+let items = await model.ReadTask();
 view.ShowAllTask(items);
 ///////////////////////////////////////////////////////////////////
 
-//DOM///////
+///////////////////DOM////////////////////////
 
 //Add
 document.getElementById("add-new-task").addEventListener("click" , () => {
     const data = document.getElementById("new-task");
     if(data.value !== ''){
-        let id = Math.floor(Math.random() * 10000);
-        //controller.addnewtask()
-        AddNewTask(id, data.value);  
-    
-        //addEventListener for delete button and update button of new li
-        let li = document.getElementById(id)
-        //delete button
-        li.children[1].addEventListener('click', ()=>{
-            DeleteTask(id)
-        })
-        //update button
-        li.children[2].addEventListener('click', ()=>{
-            UpdateTask(id)
-        })
-        //doubleClick to update
-        li.children[0].addEventListener('click', ()=>{
-            UpdateTask(id)
-        })
-
+        AddNewTask(data.value);  
         data.value = ''
     } else{
-        alert('Notthing to add!')
+        view.alertMess('Notthing to add!')
     }
 })
 
@@ -44,6 +26,7 @@ document.getElementById("delete-all").addEventListener("click" , () => {
 
 //addEventListener for li.children- delete button and update button
 for(let i=0; i< items.length; i++){
+
     let li = document.getElementById(items[i].id)
     //delete button
     li.children[1].addEventListener('click', ()=>{
@@ -60,10 +43,26 @@ for(let i=0; i< items.length; i++){
 }
 
 
-//Method view layer, model layer
-function AddNewTask(id, value) {
-    model.AddTask(id, value); //data access layer -- dal
+//////////////Method view layer, model layer/////////////
+
+function AddNewTask(value) {
+    const id = model.AddTask(value); //data access layer -- dal
     view.AddTask(id, value);
+
+    //addEventListener for delete button and update button of new li
+    let li = document.getElementById(id)
+    //delete button
+    li.children[1].addEventListener('click', ()=>{
+        DeleteTask(id)
+    })
+    //update button
+    li.children[2].addEventListener('click', ()=>{
+        UpdateTask(id)
+    })
+    //doubleClick to update
+    li.children[0].addEventListener('click', ()=>{
+        UpdateTask(id)
+    })
 }
 
 function DeleteAllTask() {
