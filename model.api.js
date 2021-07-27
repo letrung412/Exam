@@ -19,9 +19,7 @@ fetch('https://authencation.vercel.app/api/todo/create', {
   body: JSON.stringify(data),
 })
 .then(response => response.json())
-.then(data => {
-  console.log('Success:', data);
-})
+.then(data => data.id)
 .catch((error) => {
   console.error('Error:', error);
 });
@@ -68,5 +66,7 @@ export function UpdateTask(id , newvalue) {
 )
 .catch((error) => {
   console.error('Error:', error);
+  
 });
 }
+
