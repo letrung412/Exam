@@ -41,9 +41,7 @@ export function RemoveTask(id) {
         headers : {
             "Content-Type" : "application/json"
         },
-    }).then(res => res.json())
-    .then(data => data)
-    .catch(err => console.log(err))
+    }).catch(err => console.log(err))
 }
 
 export function UpdateTask(data) {
@@ -54,7 +52,5 @@ export function UpdateTask(data) {
             "Content-Type" : "application/json"
         },
         body : JSON.stringify({name : data.value}),
-    }).then(res => res.json())
-    .then(data => data)
-    .catch(err => console.log(err))
+    }).catch(err => console.log(err))
 }
