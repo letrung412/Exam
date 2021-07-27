@@ -1,6 +1,5 @@
 export function ShowAllTask(items) {
-    const ul = document.getElementsByClassName("collection");
-    items.forEach(item => AddItem(ul, item.value));
+    return items.map(item => AddItem(item));
 }
 
 export function AddTask(value) {
@@ -16,7 +15,6 @@ export function DeleteAll() {
 
 export function RemoveTask(li) {
     li.remove();
-    location.reload();
 }
 
 export function EditTask(li) {
@@ -29,21 +27,17 @@ export function EditTask(li) {
 export function SaveTask(li) {
     const btnSave = li.childNodes[3]
     const input = li.firstChild.firstChild
-    const value = input.value
-    if(!value) {
-        btnSave.setAttribute("style", "display: inline-block")
-        input.removeAttribute("disabled")
-    } else {
-        btnSave.setAttribute("style", "display: none")
-        input.setAttribute("disabled", "")
-    }
+    btnSave.setAttribute("style", "display: none")
+    input.setAttribute("disabled", "")
 }
 
-function AddItem(ul, value) {
+function AddItem(item) {
+    const ul = document.getElementsByClassName("collection");
     const li = document.createElement("li");
     li.setAttribute("class" , "collection-item");
-    if(value) {
-        AddInput(li, value);
+    li.setAttribute("id", item.id)
+    if(item) {
+        AddInput(li, item.name);
         AddBtnDelete(li);
         AddBtnEdit(li);
         AddBtnSave(li);
