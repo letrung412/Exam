@@ -1,5 +1,5 @@
 export function ShowAllTask(items) {
-    const all_btn = items.map(item => AddTask(item.value,item.id));
+    const all_btn = items.map(item => AddTask(item.name,item.id));
     return all_btn;
 }
 
@@ -34,7 +34,7 @@ function AddBtnEdit(li,index) {
 
 export function RemoveTask(li) {
     li.remove();
-    ShowAllTask();
+    //ShowAllTask();
 }
 
 export function DeleteAll() {
@@ -43,7 +43,7 @@ export function DeleteAll() {
 }
 
 export function UpdateTask(btn_edit) {
-    const value = prompt("Nhap du lieu can thay doi ");
+    const newvalue = prompt("Nhap du lieu can thay doi ");
     const id = btn_edit.getAttribute("id");
-    return { id , value };
+    return { id , newvalue };
 }

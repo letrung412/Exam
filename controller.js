@@ -1,6 +1,17 @@
 import * as view from "./view.js";
-import * as model from "./model.js";
+//import * as model from "./model.js";
+import * as model from "./model.api.js";
 
+
+/* fetch('https://authencation.vercel.app/api/todo/list')
+.then(response => response.json())
+    .then(data => {
+        return data
+    })
+  .catch(err => {
+    console.log('Lỗi', err)
+  });
+console.log(data) */
 document.getElementById("add-new-task").addEventListener("click" , () => {
     const value = document.getElementById("new-task").value;
     AddNewTask(value);  
@@ -11,7 +22,8 @@ document.getElementById("delete-all").addEventListener("click" , () => {
 })
 
 ///////////////*All Services*///////////////
-const items = model.ReadTask();
+const items = await model.ReadTask();
+console.log(items)
 const all_btns = view.ShowAllTask(items);
 function AddEvent(all_btn) {
     all_btn.map(btn => {
@@ -35,15 +47,16 @@ const DeleteAllTask = () => {
     view.DeleteAll();
 }
 
-const DeleteOneTask = (index,li) => {
-    model.RemoveTask(index);
+const DeleteOneTask = (id,li) => {
+    model.RemoveTask(id);
     view.RemoveTask(li);
 }
 
 const UpdateTask = (btn_edit) => {
     const data = view.UpdateTask(btn_edit);
+    console.log(data)
     const items = model.UpdateTask(data);
-    view.DeleteAll();
+    //view.DeleteAll();
     const all_btn = view.ShowAllTask(items);
     AddEvent(all_btn);
 }
