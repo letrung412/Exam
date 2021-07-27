@@ -36,18 +36,24 @@ function DeleteAllTask() {
     view.DeleteAll();
 }
 
-function DeleteOneTask(index,li) {
+async function ReFreshData() {
+    const items = await model.ReadTask();
+    view.DeleteAll();
+    const all_btn = view.ShowAllTask(items);
+    AddEvent(all_btn);
+}
+
+async function DeleteOneTask(index,li) {
     model.RemoveTask(index);
     view.RemoveTask(li);
+    await ReFreshData();
+
 }
 
 async function UpdateTask(btn_edit) {
     const data = view.UpdateTask(btn_edit);
     model.UpdateTask(data);
-    const items = await model.ReadTask();
-    view.DeleteAll();
-    const all_btn = view.ShowAllTask(items);
-    AddEvent(all_btn);
+    await ReFreshData();
 }
 
 
