@@ -1,6 +1,6 @@
 export function ShowAllTask(items) {
-    const all_btn = items.map(item => AddTask(item.value,item.id));
-    return all_btn;
+    const all_btns = items.map(item => AddTask(item.name,item.id));
+    return all_btns;
 }
 
 export function AddTask(value,index) {

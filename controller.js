@@ -1,5 +1,5 @@
 import * as view from "./view.js";
-import * as model from "./model.js";
+import * as model from "./model.api.js";
 
 document.getElementById("add-new-task").addEventListener("click" , () => {
     const value = document.getElementById("new-task").value;
@@ -11,7 +11,8 @@ document.getElementById("delete-all").addEventListener("click" , () => {
 })
 
 ///////////////*All Services*///////////////
-const items = model.ReadTask();
+const items = await model.ReadTask();
+console.log(items);
 const all_btns = view.ShowAllTask(items);
 function AddEvent(all_btn) {
     all_btn.map(btn => {
@@ -22,27 +23,28 @@ function AddEvent(all_btn) {
 }
 AddEvent(all_btns);
 
-const AddNewTask = (value) => {
-    const index = model.SaveTask(value); 
+async function AddNewTask(value) {
+    const index = await model.SaveTask(value); 
     const btn = view.AddTask(value,index);
     const li = btn.btn_del.parentElement;
     btn.btn_del.addEventListener("click" , () => DeleteOneTask(btn.btn_del.getAttribute("id"),li));
     btn.btn_edit.addEventListener("click" , () => UpdateTask(btn.btn_edit));
 }
 
-const DeleteAllTask = () => {
+function DeleteAllTask() {
     model.DeleteAll();
     view.DeleteAll();
 }
 
-const DeleteOneTask = (index,li) => {
+function DeleteOneTask(index,li) {
     model.RemoveTask(index);
     view.RemoveTask(li);
 }
 
-const UpdateTask = (btn_edit) => {
+async function UpdateTask(btn_edit) {
     const data = view.UpdateTask(btn_edit);
-    const items = model.UpdateTask(data);
+    model.UpdateTask(data);
+    const items = await model.ReadTask();
     view.DeleteAll();
     const all_btn = view.ShowAllTask(items);
     AddEvent(all_btn);
