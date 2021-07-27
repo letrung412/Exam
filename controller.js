@@ -45,8 +45,9 @@ for(let i=0; i< items.length; i++){
 
 //////////////Method view layer, model layer/////////////
 
-function AddNewTask(value) {
-    const id = model.AddTask(value); //data access layer -- dal
+async function AddNewTask(value) {
+    let id = await model.AddTask(value); //data access layer -- dal
+    console.log(id)
     view.AddTask(id, value);
 
     //addEventListener for delete button and update button of new li

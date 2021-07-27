@@ -9,24 +9,24 @@ export async function ReadTask(){
     }
 }
 
-export function AddTask(value){
+export async function AddTask(value){
     const data = { name: value };
     const url = ' https://authencation.vercel.app/api/todo/create'
-    fetch( url, {
+
+    try {
+        const res = await fetch( url, {
         method: 'POST', 
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(data => {
-    console.log('Success:', data);
-    return data.id
-    })
-    .catch((error) => {
-    console.error('Error:', error);
-    });
+        body: JSON.stringify(data)
+        })
+        const resData = await res.json()
+        console.log(resData)
+        return resData.id
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export function DeleteAll(){
