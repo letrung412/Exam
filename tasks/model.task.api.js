@@ -2,7 +2,6 @@ export async function ReadTask(){
     try {
         const res = await fetch('https://authencation.vercel.app/api/todo/list')
         const data = await res.json()
-        console.log(data)
         return data
     } catch (error) {
         console.log(error)
@@ -35,7 +34,6 @@ export function DeleteAll(){
     fetch( url, {
         method: 'POST'
     })
-    .then(console.log(`Deleted all tasks`))
     .catch(err=>{
         console.log(err)
     })
@@ -47,7 +45,6 @@ export function Delete(id){
     fetch( url, {
         method: 'POST'
     })
-    .then(console.log(`Deleted ${id}`))
     .catch(err=>{
         console.log(err)
     })
@@ -64,7 +61,6 @@ export function Update(id, newValue){
         },
         body: JSON.stringify(data),
     })
-    .then(console.log(`Updated ${id}`))
     .catch(err=>{
         console.log(err)
     })

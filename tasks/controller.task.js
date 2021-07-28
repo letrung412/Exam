@@ -1,5 +1,5 @@
-import * as view from "./view.js";
-import * as model from "./model.api.js";
+import * as view from "./view.task.js";
+import * as model from "./model.task.api.js";
 
 ////////method init////////////////////////////////////////////////
 let items = await model.ReadTask();
