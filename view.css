@@ -1,0 +1,56 @@
+:root{
+  --bg1 : blue;
+  --bg2 : red;
+  --text : yellow;
+}
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom right,var(--bg1),var(--bg2));
+
+}
+.form-login {
+  width: 300px;
+  height: 500px;
+  background: white;
+  border-radius: 10px;
+  padding: 40px 30px
+}
+.form-login h1{
+  margin-bottom: 40px;
+}
+.form-login button{
+  height: 35px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+.form-text {
+  margin-bottom: 40px;
+  position: relative;
+}
+.form-text input {
+  width: 100%;
+  height: 35px;
+  border: none;
+  border-bottom: 2px solid rgb(161, 85, 85);
+  cursor: pointer;
+  padding-left: 12px;
+}
+.form-text label {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  transition: 0.5s;
+}
+.form-text label.focus {
+  transform: translateY(-45px);
+}
