@@ -51,16 +51,34 @@ const DeleteOneTask = (id,li) => {
     model.RemoveTask(id);
     view.RemoveTask(li);
 }
-
-const UpdateTask = (btn_edit) => {
+/* async function ReFreshData() {
+    const items = await model.ReadTask();
+    view.DeleteAll();
+    const all_btn = view.ShowAllTask(items);
+    AddEvent(all_btn);
+} */
+/* const UpdateTask = (btn_edit) => {
     const data = view.UpdateTask(btn_edit);
     console.log(data)
     const items = model.UpdateTask(data);
     //view.DeleteAll();
     const all_btn = view.ShowAllTask(items);
     AddEvent(all_btn);
+} */
+async function UpdateTask(btn_edit) {
+    const data = view.UpdateTask(btn_edit);
+    console.log(data)
+    model.UpdateTask(data);
+    const items = await model.ReadTask()
+    const all_btn = view.ShowAllTask(items);
+    AddEvent(all_btn);
 }
-
+/* async function UpdateTask(btn_edit) {
+    const data = view.UpdateTask(btn_edit);
+    console.log(data)
+    model.UpdateTask(data);
+    await ReFreshData();
+} */
 
 
 

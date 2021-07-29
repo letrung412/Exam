@@ -43,7 +43,7 @@ export function DeleteAll() {
 }
 
 export function UpdateTask(btn_edit) {
-    const newvalue = prompt("Nhap du lieu can thay doi ");
+    const value = prompt("Nhap du lieu can thay doi ");
     const id = btn_edit.getAttribute("id");
-    return { id , newvalue };
+    return { id , value };
 }

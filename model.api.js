@@ -50,23 +50,28 @@ export function RemoveTask(id) {
 });
 }
 
-export function UpdateTask(id , newvalue) {
-  const data = {name: newvalue}
-
-  fetch('https://authencation.vercel.app/api/todo/update?id=' + id, {
-  method: 'POST', // or 'PUT'
+export function UpdateTask(data) {
+  fetch('https://authencation.vercel.app/api/todo/update?id=' + data.id, {
+  method: "POST", // or 'PUT'
+  mode : "cors",
   headers: {
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify(data),
+  body: JSON.stringify({name: data.value}),
 })
-.then(response => response.json())
-.then(
-  console.log(`Updated ${id}`)
-)
+//.then(response => response.json())
 .catch((error) => {
   console.error('Error:', error);
-  
-});
+})
 }
+/* export function UpdateTask(data) {
+  fetch('https://authencation.vercel.app/api/todo/update?id=' + data.id , {
+      method : "POST",
+      mode : "cors",
+      headers : {
+          "Content-Type" : "application/json"
+      },
+      body : JSON.stringify({name : data.value}),
+  }).catch(err => console.log(err))
+} */
 
