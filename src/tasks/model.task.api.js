@@ -1,19 +1,32 @@
+const BASE_URL = 'https://authencation.vercel.app/api/todo/'
+
+const END_POINTS = {
+    CREATE: BASE_URL + 'create',
+    READ: BASE_URL + 'list',
+    UPDATE: BASE_URL + 'update?id=',
+    DELETE: BASE_URL + 'delete?id=',
+    DELETE_ALL: BASE_URL + 'delete_all?user_id='
+}
+
+const userID = localStorage.getItem('user')
+console.log(userID)
+
 export async function ReadTask(){
     try {
-        const res = await fetch('https://authencation.vercel.app/api/todo/list')
+        const res = await fetch(END_POINTS.READ)
         const data = await res.json()
-        return data
+
+        const newData = data.filter(task => task.user.id === userID)
+        return newData
     } catch (error) {
         console.log(error)
     }
 }
 
 export async function AddTask(value){
-    const data = { name: value };
-    const url = ' https://authencation.vercel.app/api/todo/create'
-
+    const data = { name: value, user_id: userID };
     try {
-        const res = await fetch( url, {
+        const res = await fetch( END_POINTS.CREATE, {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json'
@@ -29,9 +42,7 @@ export async function AddTask(value){
 }
 
 export function DeleteAll(){
-    const url = 'https://authencation.vercel.app/api/todo/delete_all'
-
-    fetch( url, {
+    fetch( END_POINTS.DELETE_ALL + userID, {
         method: 'POST'
     })
     .catch(err=>{
@@ -40,9 +51,7 @@ export function DeleteAll(){
 }
 
 export function Delete(id){
-    const url = 'https://authencation.vercel.app/api/todo/delete?id=' + id
-
-    fetch( url, {
+    fetch( END_POINTS.DELETE + id, {
         method: 'POST'
     })
     .catch(err=>{
@@ -52,9 +61,8 @@ export function Delete(id){
 
 export function Update(id, newValue){
     const data = { name: newValue };
-    const url = 'https://authencation.vercel.app/api/todo/update?id=' + id
 
-    fetch( url, {
+    fetch( END_POINTS.UPDATE + id, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -6,12 +6,20 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
     />
-    <link rel="stylesheet" href="style.css">
     <title>Todo</title>
+    <style>
+      .nav-bar{
+        display: flex
+      }
+    </style>
   </head>
  
   <body>
     <div class="container">
+      <div class="nav-bar">
+        <h4 style="flex-grow: 8; text-align: right; margin-right: 10px" id='userName'></h4>
+        <button class="btn" id="logout" style="align-self: center">Logout</button>
+      </div>
       <h1>Task List</h1>
       <div class="input-field">
         <input type="text" id="new-task" name="task" />

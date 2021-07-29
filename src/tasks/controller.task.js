@@ -42,6 +42,9 @@ for(let i=0; i< items.length; i++){
     })
 }
 
+document.getElementById('logout').addEventListener('click', ()=> Logout())
+
+document.getElementById("userName").innerHTML = view.userName()
 
 //////////////Method view layer, model layer/////////////
 
@@ -88,4 +91,8 @@ function UpdateTask(id){
         model.Update(id, newValue)
         view.Update(id, newValue)
     })
+}
+
+function Logout(){
+    view.logout()
 }

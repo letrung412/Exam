@@ -58,6 +58,15 @@ export function Update(id, newValue){
     arrChild[3].remove()
 }
 
+export function logout(){
+    localStorage.clear()
+    window.location.replace('http://127.0.0.1:5500/src/auth/login.html')
+}
+
+export function userName(){
+    return localStorage.getItem('name')
+}
+
 //structure of li tag
 function oneTask(id, value){
     const ul = document.getElementsByClassName("collection");
