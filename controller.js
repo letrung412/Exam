@@ -1,5 +1,5 @@
 import * as view from "./view.js";
-import * as model from "./model.js";
+import * as model from "./model.api.js";
 
 document.getElementById("add-new-task").addEventListener("click" , () => {
     const value = document.getElementById("new-task").value;
@@ -11,45 +11,60 @@ document.getElementById("delete-all").addEventListener("click" , () => {
 })
 
 ///////////////*All Services*///////////////
-const items = model.ReadTask();
-const all_btns = view.ShowAllTask(items);
-function AddEvent(all_btn) {
-    all_btn.map(btn => {
-        const li = btn.btn_del.parentElement;
-        btn.btn_del.addEventListener("click" , () => DeleteOneTask(btn.btn_del.getAttribute("id"),li));
-        btn.btn_edit.addEventListener("click" , () => UpdateTask(btn.btn_edit));
-    })
-}
-AddEvent(all_btns);
+let items =  await model.ReadTask();
+view.ShowAllTask(items);
 
-const AddNewTask = (value) => {
-    const index = model.SaveTask(value); 
-    const btn = view.AddTask(value,index);
-    const li = btn.btn_del.parentElement;
-    btn.btn_del.addEventListener("click" , () => DeleteOneTask(btn.btn_del.getAttribute("id"),li));
-    btn.btn_edit.addEventListener("click" , () => UpdateTask(btn.btn_edit));
+async function AddNewTask(value) {
+    await model.AddTask(value); 
+    view.AddTask(value);
 }
 
 const DeleteAllTask = () => {
-    model.DeleteAll();
+    //model.DeleteAll();
     view.DeleteAll();
 }
 
-const DeleteOneTask = (index,li) => {
-    model.RemoveTask(index);
+async function DeleteOneTask(id,li) {
+    await model.RemoveTask(id);
     view.RemoveTask(li);
 }
 
-const UpdateTask = (btn_edit) => {
-    const data = view.UpdateTask(btn_edit);
-    const items = model.UpdateTask(data);
-    view.DeleteAll();
-    const all_btn = view.ShowAllTask(items);
-    AddEvent(all_btn);
+const Edit = (li) => {
+    view.EditTask(li)
 }
 
+async function Save (li, data) {
+    await model.UpdateTask(data)
+    view.SaveTask(li)
+}
+///////////////////////////////
+document.querySelectorAll(".delete").forEach(item => item.addEventListener("click", () => {
+    const li = document.activeElement.parentNode
+    const id  = li.getAttribute("id")
+    DeleteOneTask(id, li)
+}))
 
+document.querySelectorAll(".orange").forEach(item => item.addEventListener("click", () => {
+    const li = document.activeElement.parentNode
+    Edit(li)
+}))
 
+document.querySelectorAll(".green").forEach(item => item.addEventListener("click", () => {
+    const li = document.activeElement.parentNode
+    const id = li.getAttribute("id")
+    const value = li.firstChild.firstChild.value
+    const data = {
+        id: id,
+        name: value
+    }
+    Save(li, data)
+}))
 
+document.getElementById("add-new-task").addEventListener("click" , () => {
+    const value = document.getElementById("new-task").value;
+    AddNewTask(value);  
+})
 
-
+document.getElementById("delete-all").addEventListener("click" , () => {
+    DeleteAllTask(); 
+})
