@@ -44,10 +44,13 @@ async function ReFreshData() {
 }
 
 async function DeleteOneTask(index,li) {
-    model.RemoveTask(index);
-    view.RemoveTask(li);
-    await ReFreshData();
-
+    try {
+        model.RemoveTask(index);
+        view.RemoveTask(li);
+        await ReFreshData();
+    } catch(err) {
+        view.Noti(err);
+    }
 }
 
 async function UpdateTask(btn_edit) {

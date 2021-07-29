@@ -14,6 +14,10 @@ export function AddTask(value,index) {
     return { btn_del , btn_edit };
 }
 
+export function Noti(err) {
+    alert(err);
+}
+
 function AddBtnDelete(li,index) {
     const button = document.createElement("button");
     button.innerHTML = "delete";

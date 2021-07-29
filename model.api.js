@@ -9,7 +9,6 @@ const ENDPOINT_API = {
     DELETE_ALL : `${BASE_URL}/delete_all`
 }
 
-
 export function ReadTask() {
     return fetch(ENDPOINT_API.LIST , {
         mode : "cors",
