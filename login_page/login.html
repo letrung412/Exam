@@ -10,19 +10,19 @@
 <body>
 	<section>
 		<div class="imgBg">
-			<img src="img/pexels-andrea-piacquadio-920381.jpg" alt="">
+			<!-- <img src="img/pexels-andrea-piacquadio-920381.jpg" alt=""> -->
 		</div>
 		<div class="content">
 			<div class="form">
 				<h2>Login</h2>
 				<div class="form_item">
 					<span>UserName</span>
-					<input type="text">
+					<input id = "username" type="text">
 				</div>
 
 				<div class="form_item">
 					<span>Password</span>
-					<input type="password">
+					<input id = "password" type="password">
 				</div>
 
 				<div class="remember">
@@ -33,7 +33,7 @@
 				</div>
 
 				<div class="form_item">
-					<input type="submit" value="Sign in">
+					<input id = "confirm" type="submit" value="Sign in">
 				</div>
 
 				<div class="form_item">
@@ -42,5 +42,6 @@
 			</div>
 		</div>
 	</section>
+<script type = "module" src="../src/login/login_controller.js"></script>	
 </body>
 </html>

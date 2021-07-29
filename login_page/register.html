@@ -10,7 +10,7 @@
 <body>
 	<section>
 		<div class="imgBg">
-			<img src="img/pexels-andrea-piacquadio-920381.jpg" alt="">
+			<!-- <img src="img/pexels-andrea-piacquadio-920381.jpg" alt=""> -->
 		</div>
 		<div class="content">
 			<div class="form">
@@ -18,21 +18,21 @@
 
 				<div class="form_item">
 					<span>FullName</span>
-					<input type="text">
+					<input id = "full_name" type="text">
 				</div>
 
 				<div class="form_item">
 					<span>UserName</span>
-					<input type="text">
+					<input id = "username" type="text">
 				</div>
 
 				<div class="form_item">
 					<span>Password</span>
-					<input type="password">
+					<input id ="password" type="password">
 				</div>
 
 				<div class="form_item">
-					<input type="submit" value="Register">
+					<input id ="register" type="submit" value="Register">
 				</div>
 
 				<div class="form_item">
@@ -41,5 +41,6 @@
 			</div>
 		</div>
 	</section>
+<script type = "module" src="../src/register/register_controller.js"></script>
 </body>
 </html>
