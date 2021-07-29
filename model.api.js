@@ -1,55 +1,50 @@
-const BASE_URL = "https://authencation.vercel.app/api/todo"
-
-const ENDPOINT_API = {
-    LIST : `${BASE_URL}/list`,
-    GET : `${BASE_URL}/get?id=`,
-    CREATE : `${BASE_URL}/create`,
-    UPDATE : `${BASE_URL}/update?id=`,
-    DELETE : `${BASE_URL}/delete?id=`,
-    DELETE_ALL : `${BASE_URL}/delete_all`
+export async function ReadTask() {
+  try {
+      const res = await fetch('https://authencation.vercel.app/api/todo/list')
+      const data = await res.json()
+      console.log(data)
+      return data
+  } catch (error) {
+      console.log(error)
+  }
 }
 
-export function ReadTask() {
-    return fetch(ENDPOINT_API.LIST , {
-        mode : "cors",
-        headers : {
-            "Content-Type" : "application/json"
-        }
-    }).then(res => res.json())
-    .then(data => data)
-    .catch(err => console.log(err))
-}
-
-export function SaveTask(value) {
-    return fetch(ENDPOINT_API.CREATE , {
-        method : "POST",
-        mode : "cors",
-        headers : {
-            "Content-Type" : "application/json"
-        },
-        body : JSON.stringify({name : value}),
-    }).then(res => res.json())
-    .then(data => data.id)
-    .catch(err => console.log(err))
+export function AddTask(value) {
+  const data = { name : value}
+  const options = {
+    method: 'POST',
+    //mode: 'cors',
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    body : JSON.stringify(data)
+  }
+  return fetch('https://authencation.vercel.app/api/todo/create', options)
+          .then(res => res.json())
+          .then(data => data.id)
 }
 
 export function RemoveTask(id) {
-    fetch(ENDPOINT_API.DELETE + id , {
-        method : "POST",
-        mode : "cors",
-        headers : {
-            "Content-Type" : "application/json"
-        },
-    }).catch(err => console.log(err))
+  const options = {
+    method: 'POST',
+    headers: {
+      "Content-Type" : "application/json"
+    }
+  }
+  fetch('https://authencation.vercel.app/api/todo/delete?id=' + id, options)
+    .then(res => res.json())
+    .then(data => data)
 }
 
 export function UpdateTask(data) {
-    fetch(ENDPOINT_API.UPDATE + data.id , {
-        method : "POST",
-        mode : "cors",
-        headers : {
-            "Content-Type" : "application/json"
-        },
-        body : JSON.stringify({name : data.value}),
-    }).catch(err => console.log(err))
+  const options = {
+    method: 'POST',
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    body: JSON.stringify({name: data.name})
+  }
+  fetch('https://authencation.vercel.app/api/todo/update?id=' + data.id, options)
+    .then(res => res.json())
+    .then(data => data)
 }

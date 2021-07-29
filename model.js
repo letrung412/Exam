@@ -3,7 +3,7 @@ export function SaveTask(value) {
     let array = localStorage["tasks"]; 
     let obj = {};
     if (value.length == 0) {
-        return;
+        return alert `Chua nhap gia tri`
     }
     if (array == undefined) {
         index = 0;
@@ -46,7 +46,7 @@ export function ReadTask() {
 }
 
 export function DeleteAll() {
-    localStorage["tasks"] = JSON.stringify([]);
+    localStorage.clear()
 }
 
 export function RemoveTask(index) {
@@ -74,5 +74,17 @@ export function UpdateTask(data) {
     return items;
 }
 
-
-
+export function SaveEditTask(index, value, oldValue) {
+    const list = JSON.parse(localStorage["tasks"])
+    const oldObj = list[index]
+    const newObj = {
+        id : oldObj.id,
+        value : value ? value : oldValue
+    }
+    if(!value) {
+        alert `Khong the bo trong`
+    } else {
+        list.splice(index, 1, newObj)
+        localStorage["tasks"] = JSON.stringify(list)
+    }
+}
